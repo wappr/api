@@ -27,7 +27,7 @@ class AuthController extends Controller
 				'email' => $user->email,
 				'iat' => strtotime('today + 7 days')
 			], env('JWT_SECRET')),
-      'status' => 'success'
+            'status' => 'success'
 		];
 	}
 }
