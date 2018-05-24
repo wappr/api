@@ -14,5 +14,7 @@ Route::get('version', function () {
 Route::prefix('v'.env('APP_MAJOR'))->group(function() {
     // User Auth Route
     Route::match(['get', 'post'], 'auth', 'AuthController@authenticate');
+
+    // User Contacts Route - Requires valid JWT
     Route::match(['get', 'post'], 'contacts', 'ContactsController@retrieve')->middleware('token');
 });

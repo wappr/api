@@ -10,7 +10,7 @@ use \Firebase\JWT\SignatureInvalidException;
 class CheckToken
 {
     /**
-     * Handle an incoming request.
+     * Check incoming request to see if it has a valid JWT
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
@@ -18,6 +18,9 @@ class CheckToken
      */
     public function handle($request, Closure $next)
     {
+        // Decoding a bad JWT can result in an exception that we need to handle
+        // gracefully. So, if we get a bad token, log it and return a 403.
+        // Otherwise move onto the next middleware.
         try {
             $decoded = JWT::decode($request->token, env('JWT_SECRET'), ['HS256']);
         } catch(SignatureInvalidException $e) {

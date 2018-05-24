@@ -8,6 +8,6 @@ class ContactsController extends Controller
 {
     public function retrieve(Request $request)
 	{
-		// Retrieve
+		return 'contacts';
 	}
 }
