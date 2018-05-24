@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use \Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,6 +20,13 @@ class AuthController extends Controller
 			return response()->json(['error' => 'Not authorized'], 403);
 		}
 
-		return 'yes';
+		return [
+			'token' => JWT::encode([
+				'sub' => $user->id,
+				'name' => $user->name,
+				'email' => $user->email,
+				'iat' => strtotime('today + 7 days')
+			], env('JWT_SECRET'))
+		];
 	}
 }
