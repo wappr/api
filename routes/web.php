@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/', function() {
+    return '';
+});
+
 // Return the current api version
 Route::get('version', function () {
     return [
