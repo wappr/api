@@ -4,8 +4,18 @@ namespace App\Repositories;
 
 use App\Contacts;
 
+/**
+ * App\Contacts repository to simplify tasks
+ */
 class ContactsRepository
 {
+    /**
+     * Create a friendship
+     *
+     * @param  string $user_1 uuid of user
+     * @param  string $user_2 uuid of user
+     * @return bool
+     */
     public static function create($user_1, $user_2)
     {
         // Figure out which uuid is less than the other and assign them to
@@ -27,6 +37,13 @@ class ContactsRepository
         return $contacts->save();
     }
 
+    /**
+     * Check if a friendship already exists
+     *
+     * @param  string $user_a uuid of user
+     * @param  string $user_b uuid of user
+     * @return bool
+     */
     public static function exists($user_a, $user_b)
     {
         // Look to see if their pals

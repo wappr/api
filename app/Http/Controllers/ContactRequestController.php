@@ -6,8 +6,17 @@ use App\ContactRequest;
 use Illuminate\Http\Request;
 use App\Repositories\ContactsRepository;
 
+/**
+ * Controller for adding new pals
+ */
 class ContactRequestController extends Controller
 {
+    /**
+     * Send someone a request to be contacts
+     *
+     * @param  Request $request
+     * @return Response
+     */
     public function send(Request $request)
     {
         $cr = new ContactRequest;
@@ -21,6 +30,12 @@ class ContactRequestController extends Controller
         return ['status' => 'failed'];
     }
 
+    /**
+     * Accept a pal request
+     * 
+     * @param  Request $request
+     * @return Response
+     */
     public function accept(Request $request)
     {
         // Delete the request
