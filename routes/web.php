@@ -21,4 +21,8 @@ Route::prefix('v'.env('APP_MAJOR'))->group(function() {
 
     // User Contacts Route - Requires valid JWT
     Route::match(['get', 'post'], 'contacts', 'ContactsController@retrieve')->middleware('token');
+
+    // Find users to be friends with - Requires valid JWT
+    // Requires keywords paramter to be passed
+    Route::match(['get', 'post'], 'search', 'ContactsController@search')->middleware('token');
 });

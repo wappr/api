@@ -11,4 +11,9 @@ class ContactsController extends Controller
 	{
 		return User::get(['id', 'name']);
 	}
+
+    public function search(Request $request)
+    {
+        return User::where('name', 'like', '%' . $request->keywords . '%')->get();
+    }
 }
