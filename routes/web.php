@@ -25,4 +25,10 @@ Route::prefix('v'.env('APP_MAJOR'))->group(function() {
     // Find users to be friends with - Requires valid JWT
     // Requires keywords paramter to be passed
     Route::match(['get', 'post'], 'search', 'ContactsController@search')->middleware('token');
+
+    // Send a request to another contact
+    Route::match(['get', 'post'], 'request', 'ContactRequestController@send')->middleware('token');
+
+    // Accept a pal request
+    Route::match(['get', 'post'], 'request/accept', 'ContactRequestController@accept')->middleware('token');
 });
