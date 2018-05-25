@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class ContactsController extends Controller
 {
     public function retrieve(Request $request)
-	{
-		return User::get(['id', 'name']);
-	}
+    {
+        return User::get(['id', 'name']);
+    }
 
     public function search(Request $request)
     {
