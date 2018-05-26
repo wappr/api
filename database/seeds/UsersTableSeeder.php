@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
 
         $user = new User;
         $user->name = 'Alex Wrong';
-        $user->email = 'alexdong@gmail.com';
+        $user->email = 'alexwong@gmail.com';
         $user->password = bcrypt('password');
         $user->save();
 
