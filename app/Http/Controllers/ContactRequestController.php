@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Token;
 use App\ContactRequest;
 use Illuminate\Http\Request;
 use App\Repositories\ContactsRepository;
@@ -19,8 +20,9 @@ class ContactRequestController extends Controller
      */
     public function send(Request $request)
     {
+        $from = Token::getUserId($request->token);
         $cr = new ContactRequest;
-        $cr->from = $request->from;
+        $cr->from = $from;
         $cr->to = $request->to;
 
         if($cr->save()) {
@@ -32,7 +34,7 @@ class ContactRequestController extends Controller
 
     /**
      * Accept a pal request
-     * 
+     *
      * @param  Request $request
      * @return Response
      */

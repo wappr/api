@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactRequest extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 }
