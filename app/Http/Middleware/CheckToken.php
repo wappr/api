@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Helpers\Token;
 use Illuminate\Support\Facades\Log;
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\SignatureInvalidException;
@@ -18,12 +19,10 @@ class CheckToken
      */
     public function handle($request, Closure $next)
     {
-        // Decoding a bad JWT can result in an exception that we need to handle
-        // gracefully. So, if we get a bad token, log it and return a 403.
-        // Otherwise move onto the next middleware.
-        try {
-            $decoded = JWT::decode($request->token, env('JWT_SECRET'), ['HS256']);
-        } catch(SignatureInvalidException $e) {
+        // Use the Token helper to check if the JWT is valid. If the token isn't
+        // valid, go ahead and log it, and return a response with the 403
+        // error code indicating the request isn't authorized.
+        if(!Token::isValid($request->token)) {
             Log::info('Invalid Signature for JWT in middleware');
 
             return response()->json(['error' => 'Not authorized'], 403);
